@@ -1,0 +1,46 @@
+      TIME TO COSMETIC DETERIORATION OF BREAST CANCER PATIENTS
+
+This is a data set from a retrospective study carried out to compare
+the cosmetic effects of radiotherapy alone versus radiotherapy and
+adjuvant chemotherapy on women with early breast cancer.  The use of
+excision biopsy followed by radiation therapy has been suggested as
+an alternative to mastectomy.  This therapy preserves the breast and
+hence has the benefit of an improved cosmetic effect.  The use of
+adjuvant chemotherapy is indicated to prevent reoccurrence of the
+cancer, but there is some clinical evidence that it enhances the
+effects of radiation on normal tissue thus offsetting the cosmetic
+benefit of this procedure.
+
+To compare the two treatment regimes a retrospective study of 46
+radiation only and 48 radiation plus chemotherapy patients was made.
+Patients were observed initially every 4--6 months but as their
+recovery progressed the interval between visits lengthen.  At each
+visit the clinician recorded a measure of breast retraction on a
+three point scale (none, moderate, severe).  The event of interest
+was the time to first appearance of moderate or severe breast
+retraction.  Due to the fact that patients were only observed at
+these random times the exact time of breast retraction is known only
+to fall in the interval between visits.
+
+The data consists of the interval, in months, in which deterioration
+occurred (interval censored observations) or the last time a patient
+was seen without having deterioration occurred as yet (right
+censored observations).
+
+
+REFERENCES
+
+Beadle, G., Come, S., Henderson, C., Silver, B., and Hellman, S.
+(1984).  The effect of adjuvant chemotherapy on the cosmetic results
+after primary radiation treatment for early stage breast cancer.
+International Journal of Radiation Oncology, Biology and Physics,
+10, 2131--2137.
+
+Beadle, G., Harris, J., Silver, B., Botnick, L, and Hellman, S (1984).
+Cosmetic results following primary radiation therapy for early
+breast cancer.  Cancer, 54, 2911--2918.
+
+
+This data set is also studied in the book "Survival Analysis" by J.
+Klein and M. Moeschberger (1997 Springer New York).  See Section 5.2
+of the book.

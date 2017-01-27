@@ -1,0 +1,139 @@
+% This is my HW 6 solution set.
+
+\documentclass[12pt, leqno]{article}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\newcounter{qcounter}
+\usepackage[lofdepth,lotdepth]{subfig}
+\usepackage[maxfloats=40]{morefloats}
+\usepackage{float}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\macheps}{\epsilon_{\mbox{\scriptsize mach}}}
+\usepackage[ampersand]{easylist}
+\makeatletter
+\newcommand{\distas}[1]{\mathbin{\overset{#1}{\kern\z@\sim}}}%
+\newsavebox{\mybox}\newsavebox{\mysim}
+\newcommand{\distras}[1]{%
+  \savebox{\mybox}{\hbox{\kern3pt$\scriptstyle#1$\kern3pt}}%
+  \savebox{\mysim}{\hbox{$\sim$}}%
+  \mathbin{\overset{#1}{\kern\z@\resizebox{\wd\mybox}{\ht\mysim}{$\sim$}}}%
+}
+\makeatother
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{Syed Rahman}
+\rhead{STA6866}
+
+\begin{center}
+{\large {\bf Homework 3}} \\
+\end{center}
+\paragraph{1}
+Let $I = \int_{-\infty}^{\infty} e^{-x^4} dx$.
+Then
+\[
+ I = \int_{-\infty}^{\infty} e^{-x^4} dx 
+  = \sqrt{2\pi} \int_{-\infty}^{\infty} e^{-x^4+x^2/2} \phi(x) dx
+\]
+where $\phi(x)$ denotes the density of the standard normal. Let $X_1,
+..., X_{1000000}
+\distas{iid} N(0,1)$. Thus using simple
+importance sampling we can let 
+
+\[
+\hat{I} = \frac{1}{n} \sum_i ^ n h(X_i) = 1.811491
+\]
+
+
+\[
+SE(\hat{I}) = \frac{1}{n} \sum_{i=1} ^ n (h(X_i)-\hat{I})^2 = 0.002581333
+\]
+
+where $h(x) = \sqrt{2\pi} e^{-x^4+x^2/2}$
+\paragraph{2}
+To calculate the posterior expectation of $\theta$ given $X=1$ we use
+importance sampling without a normalizing constant based of
+Hastings(1970). Let $\hat{I}$ denote our estimate. Also let $\theta_1,
+..., \theta_{1000000}
+\distas{iid} N(1,1)$.  Then 
+\[
+\hat{I} = \sum_{i=1}^n w_i \theta_i = 0.5537485
+\]
+where $w_i =
+\frac{1}{1+\theta_i^2}/(\sum_{j=1}^n\frac{1}{1+\theta_j^2})$
+and
+\[
+SE(\hat{I}) = \sqrt{\frac{(\hat{\sigma}_{11}^2/(\hat{v}^2) -
+    2\hat{\sigma}_{12}^2(\hat{u}/(\hat{v}^3)) +
+    \hat{\sigma}_{22}^2(\hat{u}^2)/(\hat{v}^4))}{n}} = 0.0007334674
+\]
+Via the central limit theorem and the delta method, we derive that 
+\[
+\sqrt{n} (\frac{\sum_{j=1}^n h(\theta_i) l(\theta_i)}{\sum_{j=1}^n
+  l(\theta_i)} - \frac{u}{v})
+\xrightarrow[]{d} N(0, \frac{\sigma_{11}^2}{v^2} -
+2\frac{\sigma_{12}^2 u}{v^3} + \frac{\sigma_{22}^2 u^2}{v^4})
+\]
+
+where $E[h(\theta)l(\theta)] = u$, $E[l(\theta)] = v$ and the variance-covariance matrix for $h(\theta)l(\theta)$ and
+$l(\theta)$ is denoted by
+
+\[
+\Sigma = 
+\begin{pmatrix}
+\sigma_{11}^2 & \sigma_{12}^2 \\
+\sigma_{12}^2 & \sigma_{22}^2 \\
+\end{pmatrix}
+\]
+
+As in the previous problem we use the usual estimates for all of
+these. For example,
+\[
+\hat{u} = \frac{\sum_{j=1}^n h(\theta_i) l(\theta_i)}{n} ,
+\]
+
+\[
+\hat{\sigma }_{11}^2 = \frac{\sum_{j=1}^n (h(\theta_i) l(\theta_i) - \hat{u})^2}
+{n}\]
+
+and
+
+\[
+\hat{\sigma }_{12}^2 = \frac{\sum_{j=1}^n (h(\theta_i) l(\theta_i) - \hat{u})(l(\theta_i) - \hat{v})}
+{n}\]
+
+\pagebreak
+
+\paragraph{Appendix 1: R code for Problem 1}
+\begin{verbatim}
+set.seed(10)
+n = 1000000
+X=rnorm(n)
+h = function(x){exp(-x^4+(x^2)/2)}
+Ihat = sqrt(2*pi)*mean(h(X))
+SE = (2*pi)*sqrt(var(h(X)))/sqrt(n)
+\end{verbatim}
+
+\paragraph{Appendix 2: R code for Problem 2}
+\begin{verbatim}
+set.seed(10)
+n = 1000000
+th = rnorm(n,1,1)
+h1 = function (x) {x/(pi*(1+x^2))}
+h2 = function (x) {1/(pi*(1+x^2))}
+u = mean(h1(th))
+v = mean(h2(th))
+s1 = var(h1(th))
+s2 = var(h2(th))
+s12 = cov(h1(th),h2(th))
+Ihat = u/v
+SE = sqrt(s1/(v^2) - 2*s12*(u/(v^3)) + s2*(u^2)/(v^4))/sqrt(n)
+\end{verbatim}
+
+\end{document}
+

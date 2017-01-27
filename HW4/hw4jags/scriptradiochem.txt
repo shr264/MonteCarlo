@@ -1,0 +1,10 @@
+model clear
+data clear
+model in "model.txt"
+data in "radiochemdata.txt"
+compile
+inits in "initial.txt"
+initialize
+update 10000
+update 100000
+coda *

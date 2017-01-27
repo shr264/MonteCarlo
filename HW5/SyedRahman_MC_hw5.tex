@@ -1,0 +1,42 @@
+% This is my HW 4 solution set.
+
+\documentclass[12pt, leqno]{article}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\newcounter{qcounter}
+\usepackage[lofdepth,lotdepth]{subfig}
+\usepackage[maxfloats=40]{morefloats}
+\usepackage{float}
+\usepackage{}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\providecommand{\abs}[1]{\lvert#1\rvert} % absolute value
+\providecommand{\normd}{\mathcal{N}} % normal distribution
+\providecommand{\norm}[1]{\lVert#1\rVert} % norm
+\newcommand{\macheps}{\epsilon_{\mbox{\scriptsize mach}}}
+\usepackage[ampersand]{easylist}
+\makeatletter
+\newcommand{\distas}[1]{\mathbin{\overset{#1}{\kern\z@\sim}}}%
+\newsavebox{\mybox}\newsavebox{\mysim}
+\newcommand{\distras}[1]{%
+  \savebox{\mybox}{\hbox{\kern3pt$\scriptstyle#1$\kern3pt}}%
+  \savebox{\mysim}{\hbox{$\sim$}}%
+  \mathbin{\overset{#1}{\kern\z@\resizebox{\wd\mybox}{\ht\mysim}{$\sim$}}}%
+}
+\makeatother
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{Syed Rahman}
+\rhead{STA6866}
+
+\begin{center}
+{\large {\bf Homework 5}} \\
+\end{center}
+\paragraph{1.}
+
+\end{document}
+ 
+

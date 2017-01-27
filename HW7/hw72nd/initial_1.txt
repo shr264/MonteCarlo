@@ -1,0 +1,2 @@
+".RNG.name" <- "base::Super-Duper"
+".RNG.seed" <- c(12)

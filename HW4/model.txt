@@ -1,0 +1,5 @@
+model {
+X ~ dexp(a)
+lambda[1] ~ b*exp(X) - b
+lambda[2] ~ b*exp(X) - b
+}

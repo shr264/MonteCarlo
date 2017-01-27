@@ -1,0 +1,8 @@
+model {
+for (i in 1:N) {
+X[i]~dnorm(theta[i],1)
+theta[i]~dnorm(mu,1/(tau))
+}
+mu~dnorm(0,1/(1000))
+tau ~ dchisqr(5)
+}

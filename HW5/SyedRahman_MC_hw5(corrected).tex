@@ -1,0 +1,121 @@
+% This is my HW 4 solution set.
+
+\documentclass[12pt, leqno]{article}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\newcounter{qcounter}
+\usepackage[lofdepth,lotdepth]{subfig}
+\usepackage[maxfloats=40]{morefloats}
+\usepackage{float}
+\usepackage{}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\providecommand{\abs}[1]{\lvert#1\rvert} % absolute value
+\providecommand{\normd}{\mathcal{N}} % normal distribution
+\providecommand{\norm}[1]{\lVert#1\rVert} % norm
+\newcommand{\macheps}{\epsilon_{\mbox{\scriptsize mach}}}
+\usepackage[ampersand]{easylist}
+\makeatletter
+\newcommand{\distas}[1]{\mathbin{\overset{#1}{\kern\z@\sim}}}%
+\newsavebox{\mybox}\newsavebox{\mysim}
+\newcommand{\distras}[1]{%
+  \savebox{\mybox}{\hbox{\kern3pt$\scriptstyle#1$\kern3pt}}%
+  \savebox{\mysim}{\hbox{$\sim$}}%
+  \mathbin{\overset{#1}{\kern\z@\resizebox{\wd\mybox}{\ht\mysim}{$\sim$}}}%
+}
+\makeatother
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{Syed Rahman}
+\rhead{STA6866}
+
+\begin{center}
+{\large {\bf Homework 5}} \\
+\end{center}
+\paragraph{1.}Suppose 
+\[
+\bigg( \begin{matrix} X \\ Y \end{matrix}\bigg)  \sim \normd_2 \Bigg( \bigg(\begin{matrix} 0 \\
+  0 \end{matrix}\bigg) , \bigg(\begin{matrix} 1 & \rho \\ \rho &
+  1 \end{matrix}\bigg)\Bigg) 
+\]
+Then $X_i|Y_{i-1} \sim \normd(\rho Y_{i-1}, (1-\rho ^2))$ 
+and $Y_i|X_i \sim \normd (\rho X_i, (1-\rho ^2))$. We can use the following estimators for $E[X]$:
+\[
+\hat{I} = \frac{1}{n} \sum_{i=1}^n X_i
+\]
+and 
+\[
+\hat{I}_{RB} = \frac{1}{n} \sum_{i=1}^n E[X_i|Y_{i-1}] = \frac{1}{n}
+\sum_{i=1}^n \rho Y_{i-1}
+\]
+Let $S_x = \sum_{i=1}^n X_i$ and $S_y = \sum_{i=1}^n Y_{i-1}$ where we
+start the Markov chain at $X_0 = x_0$ and generate $Y_0 \sim \normd
+(\rho x_0,1- \rho^2)$. Since the chain is generated using $X_i|Y_{i-1}
+\sim \normd(\rho Y_{i-1}, (1-\rho ^2))$ and $Y_i|X_i \sim \normd (\rho
+X_i, (1-\rho ^2))$, we have that $X_n|X_{n-1}
+\sim \normd (\rho^2X_{n-1},1- \rho^4)$, which implies $X_n|X_1 \sim
+\normd(\rho^{2(n-1)}X_1,1-\rho^{4(n-1)})$. Therefore,
+\begin{align} 
+Var(X_n|X_1) &=1-\rho^{4(n-1)} \label{varx}
+\end{align}
+and 
+\begin{align}
+Cov(X_i,X_j|X_1) &= E(X_i,X_j|X_1) - E(X_i|X_1)E(X_j|X_1) \notag \\
+&= E(E(X_i,X_j|X_1,X_i)) - E(X_i|X1)E(X_j|X_1) \notag \\
+&= E(\rho^{2(j-i)}X_i^2|X_1,X_i) - E(X_i|X_1)E(X_j|X_1) \notag \\
+&= \rho^{2(j-i)}E(X_i^2|X_1) - E(X_i|X_1)E(X_j|X_1) \notag \\
+&= \rho^{2(j-i)}(Var(X_i|X_1)+E(X_i|X_1)^2) - E(X_i|X_1)E(X_j|X_1)
+\notag \\
+&= \rho^{2(j-i)}\rho^{2(i-1)}X_1^2+\rho^{2(j-i)}(1-\rho^{4(i-1)}) -
+\rho^{2(i-1)}\rho^{2(j-1)}X_1^2 \notag \\
+&= \rho^{2(j-i)}(1-\rho^{4(i-1)}) \label{covx}
+\end{align}
+From equations \ref{varx} and \ref{covx}
+\begin{align}
+Var(S_x|X_1) &= Var(\sum_{j=2}^n X_j|X_1) \notag \\
+&= \sum_{j=2}^n Var (X_j|X_1) + 2 \mathop{\sum \sum}_{2\leq i < j \leq n } Cov
+(X_i,X_j|X_1) \notag \\
+&= \sum_{j=2}^n 1-\rho^{4(j-1)}+ 2 \mathop{\sum \sum}_{2\leq i < j
+  \leq n } \rho^{2(j-i)}(1-\rho^{4(i-1)}) \stackrel{def}{=} V \notag 
+\end{align}
+As this doesn't depend on $X_1$ we can conclude that $Var(S_y|Y_0) =
+Var(S_x|X_1) = V$ using the fact that $X_n|X_1 \sim
+\normd(\rho^{2(n-1)}X_1,1-\rho^{4(n-1)})$ and $Y_{n-1}|Y_0 \sim
+\normd(\rho^{2(n-1)}Y_0,1-\rho^{4(n-1)})$ for all $n>1$, i.e. given $X_1$ and $Y_0$
+these are both identically distributed.
+
+Note that $V$ doesn't depend on $X_1,Y_0$ or
+$x_0$. Recall that $X_1 \sim \normd (\rho^2 x_0, 1- \rho^4)$ and $Y_0 \sim \normd (\rho x_0, 1- \rho^2)$. Then 
+\begin{align}
+Var(S_x|X_0 = x_0) &= E(Var(S_x|X_1,X_0 = x_0)) + Var(E(S_x|X_1,X_0 =
+x_0)) \notag \\
+&= E(Var(S_x|X_1)) + Var(E(S_x|X_1,X_0 =
+x_0)) \notag \\
+&= E(V) + Var(\sum_{j=1}^n\rho^{2(j-1)}X_1) \notag \\
+&= V + (\sum_{j=1}^n\rho^{2(j-1)})^2(1-\rho^4) \label{varsx}
+\end{align} 
+and 
+\begin{align}
+Var(S_y|X_0 = x_0) &= E(Var(S_y|Y_0,X_0 = x_0)) + Var(E(S_x|Y_0,X_0 =
+x_0)) \notag \\
+&= E(Var(S_y|Y_0)) + Var(E(S_x|Y_0,X_0 =
+x_0)) \notag \\
+&= E(V) + Var(\sum_{j=1}^n\rho^{2(j-1)}Y_0) \notag \\
+&= V + (\sum_{j=1}^n\rho^{2(j-1)})^2(1-\rho^2) \notag\\
+&\leq Var(S_x|X_0 = x_0) \label{varsy}
+\end{align} 
+Hence, for $\rho\leq 1$
+\begin{align}
+Var(\hat{I}) &= Var(\frac{1}{n}(S_x|X_0 = x_0)) \notag \\ 
+&= \frac{1}{n^2}Var(S_x|X_0 = x_0) \notag \\ 
+& \geq \frac{\rho^2}{n^2}Var(S_x|X_0 = x_0) \notag \\
+& \geq \frac{\rho^2}{n^2}Var(S_y|X_0 = x_0) \notag \\
+& = Var(\hat{I}_{RB}) \label{varcomp}
+\end{align}
+
+\end{document}
+ 
+

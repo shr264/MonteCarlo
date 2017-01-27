@@ -1,0 +1,5 @@
+".RNG.name" <- "base::Super-Duper"
+".RNG.seed" <- 12
+"psi" <- c(0,0,0,0,0,0,0,0,0,0,0,0)
+"mu" <- 0
+"gam" <- 1

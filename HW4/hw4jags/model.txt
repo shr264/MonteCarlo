@@ -1,0 +1,8 @@
+model {
+for (i in 1:46)
+{
+Unif[i] ~ dunif(pexp(L[i]),pexp(U[i]))
+X[i] <- -log(1-Unif[i])/lambda
+}
+lambda ~ dgamma(a+N,b+sum(X))
+}

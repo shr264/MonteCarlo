@@ -1,0 +1,12 @@
+model clear
+data clear
+model in "model.txt"
+data in "data.txt"
+compile
+inits in "initial.txt"
+initialize
+update 10000
+monitor X1, thin(10)
+monitor X2, thin(10)
+update 100000
+coda *

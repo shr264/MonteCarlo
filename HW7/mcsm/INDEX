@@ -1,0 +1,57 @@
+Braking                 Quadratic regression on the car braking dataset
+EMcenso                 EM paths for a censored normal model
+Energy                  Energy intake
+SAmix                   Graphical representation of the simulated
+                        annealing sequence for the mixture posterior
+adapump                 Illustration of the danger of adaptive MCMC for
+                        the pump failure data
+betagen                 Plot explaining accept-reject on a
+                        Beta(2.7,6.3) target
+challenge               Slice sampler analysis of the challenger
+                        dataset
+challenger              O-ring failures against temperature for shuttle
+                        launches
+dmunorm                 Density function of the multivariate normal
+                        distribution
+dyadic                  A dyadic antithetic improvement for a toy
+                        problem
+gibbsmix                Implementation of a Gibbs sampler on a mixture
+                        posterior
+hastings                Reproduction of Hastings' experiment
+jamestein               Monte Carlo plots of the risks of James-Stein
+                        estimators
+kscheck                 Convergence assessment for the pump failure
+                        data
+logima                  Logistic analysis of the Pima.tr dataset with
+                        control variates
+maximple                Graphical representation of a toy example of
+                        simulated annealing
+mhmix                   Implement two Metropolis-Hastings algorithms on
+                        a mixture posterior
+mochoice                An MCMC model choice illustration for the
+                        linear model
+mump                    Illustration of Gelman and Rubin's diagnostic
+                        on the pump failure data
+normbyde                Compare two double-exponentials approximations
+                        to a normal distribution
+pimamh                  Langevin MCMC algorithm for the probit
+                        posterior
+pimax                   Monte Carlo approximation of a probit posterior
+                        marginal
+randogibs               First illustrations of coda's output for the
+                        one-way random effect model
+randogit                MCEM resolution for a probit maximum likelihood
+randomeff               Gibbs sampler for a one-way random effect model
+rdirichlet              Dirichlet generator
+reparareff              Reparameterized version of the one-way random
+                        effect model
+rmunorm                 Random generator for the multivariate normal
+                        distribution
+sqar                    Illustration of some of coda's criterions on
+                        the noisy squared AR model
+sqaradap                Illustration of the dangers of doing adaptive
+                        MCMC on a noisy squared AR model
+test1                   Poor chi-square generator
+test2                   Generic chi-square generator
+test3                   Approximate Poisson generator
+test4                   Replicate Poisson generator
